@@ -1,7 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Windows;
 using Prism.Ioc;
+using PromptDiff.Utils;
 using PromptDiff.Views;
 
 namespace PromptDiff;
@@ -16,9 +16,7 @@ public partial class App
         // Ensure a folder named "local_data" exists in the executable directory at startup
         try
         {
-            var baseDir = AppContext.BaseDirectory;
-            var localDataPath = Path.Combine(baseDir, "local_data");
-            Directory.CreateDirectory(localDataPath);
+            Directory.CreateDirectory(AppPaths.LocalDataDirectory);
         }
         catch
         {
