@@ -16,7 +16,7 @@
     mc:Ignorable="d">
     <Grid>
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
-        <ListBox ItemsSource="{Binding Paths}">
+        <ListBox ItemsSource="{Binding Paths}" KeyDown="ListBox_OnKeyDown">
             <i:Interaction.Behaviors>
                 <behaviors:DropPngFilesToPathsBehavior />
             </i:Interaction.Behaviors>
