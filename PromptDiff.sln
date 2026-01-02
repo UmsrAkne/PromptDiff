@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptDiff", "PromptDiff\PromptDiff.csproj", "{53526112-6C7F-4B79-86A3-F26892EC2A00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PromptDIff.Tests", "PromptDIff.Tests\PromptDIff.Tests.csproj", "{C3F1D1F2-4033-49B7-82E1-F3C0F88D4382}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{53526112-6C7F-4B79-86A3-F26892EC2A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53526112-6C7F-4B79-86A3-F26892EC2A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53526112-6C7F-4B79-86A3-F26892EC2A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3F1D1F2-4033-49B7-82E1-F3C0F88D4382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3F1D1F2-4033-49B7-82E1-F3C0F88D4382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3F1D1F2-4033-49B7-82E1-F3C0F88D4382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3F1D1F2-4033-49B7-82E1-F3C0F88D4382}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
