@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.IO;
+using System.Windows;
 using Prism.Ioc;
+using PromptDiff.Utils;
 using PromptDiff.Views;
 
 namespace PromptDiff;
@@ -9,6 +11,23 @@ namespace PromptDiff;
 /// </summary>
 public partial class App
 {
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        // Ensure a folder named "local_data" exists in the executable directory at startup
+        try
+        {
+            Directory.CreateDirectory(AppPaths.LocalDataDirectory);
+        }
+        catch
+        {
+            // Swallow exceptions to avoid blocking app startup; optionally log here in the future.
+        }
+        finally
+        {
+            base.OnStartup(e);
+        }
+    }
+
     protected override Window CreateShell()
     {
         return Container.Resolve<MainWindow>();
