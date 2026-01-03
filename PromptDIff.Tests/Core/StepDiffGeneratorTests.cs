@@ -20,7 +20,12 @@ namespace PromptDIff.Tests.Core
 
             // Act
             var results = StepDiffGenerator
-                .GenerateStepVariants(input, startOffset: 0, count: 5)
+                .GenerateStepVariants(new StepVariantRequest
+                {
+                    RequestLine = input,
+                    StartOffset = 0,
+                    Count = 5
+                })
                 .ToList();
 
             // Assert

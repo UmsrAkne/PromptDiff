@@ -7,17 +7,14 @@ namespace PromptDiff.Core
     {
         private readonly static Regex StepsRegex = new Regex(@"--steps\s+(-?\d+)", RegexOptions.Compiled);
 
-        public static IEnumerable<string> GenerateStepVariants(
-            string requestLine,
-            int startOffset,
-            int count)
+        public static IEnumerable<string> GenerateStepVariants(StepVariantRequest request)
         {
-            if (string.IsNullOrWhiteSpace(requestLine) || count <= 0)
+            if (request == null || string.IsNullOrWhiteSpace(request.RequestLine) || request.Count <= 0)
             {
                 yield break;
             }
 
-            var match = StepsRegex.Match(requestLine);
+            var match = StepsRegex.Match(request.RequestLine);
             if (!match.Success)
             {
                 yield break;
@@ -25,12 +22,12 @@ namespace PromptDiff.Core
 
             var originalSteps = int.Parse(match.Groups[1].Value);
 
-            for (int i = 0; i < count; i++)
+            for (int i = 0; i < request.Count; i++)
             {
-                var newSteps = originalSteps + startOffset + i;
+                var newSteps = originalSteps + request.StartOffset + i;
 
                 yield return StepsRegex.Replace(
-                    requestLine,
+                    request.RequestLine,
                     $"--steps {newSteps}",
                     1);
             }
