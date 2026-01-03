@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Windows;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -18,6 +17,12 @@ public class MainWindowViewModel : BindableBase
 
     public ObservableCollection<string> Paths { get; } = new ();
 
+    public StepVariantRequest StepVariantRequest { get; set; } = new ()
+    {
+        StartOffset = 0,
+        Count = 5,
+    };
+
     public DelegateCommand CopyRequestToClipboardCommand => new (() =>
     {
         if (Paths.Count == 0)
@@ -31,17 +36,18 @@ public class MainWindowViewModel : BindableBase
         {
             var rawMetadata = PngMetadataReader.ReadPngTextMetadata(path);
             var requestLine = PromptRequestFormatter.ConvertToPromptRequest(rawMetadata);
-            var results = StepDiffGenerator.GenerateStepVariants(requestLine, 0, 5);
+            var results = StepDiffGenerator.GenerateStepVariants(new StepVariantRequest
+            {
+                RequestLine = requestLine,
+                StartOffset = StepVariantRequest.StartOffset,
+                Count = StepVariantRequest.Count,
+            });
             requests.AddRange(results);
         }
 
         var requestText = string.Join(Environment.NewLine, requests);
         Clipboard.SetText(requestText);
 
-        using TextWriter tw = new StreamWriter(Path.Combine(AppPaths.LocalDataDirectory, "log.txt"));
-        tw.WriteLine(string.Empty);
-        tw.WriteLine($"TimeStamp: {DateTime.Now}");
-        tw.WriteLine(string.Empty);
-        tw.WriteLine(requestText);
+        LogWriter.Write(requestText);
     });
 }
