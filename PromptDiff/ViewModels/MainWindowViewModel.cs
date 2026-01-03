@@ -38,10 +38,6 @@ public class MainWindowViewModel : BindableBase
         var requestText = string.Join(Environment.NewLine, requests);
         Clipboard.SetText(requestText);
 
-        using TextWriter tw = new StreamWriter(Path.Combine(AppPaths.LocalDataDirectory, "log.txt"));
-        tw.WriteLine(string.Empty);
-        tw.WriteLine($"TimeStamp: {DateTime.Now}");
-        tw.WriteLine(string.Empty);
-        tw.WriteLine(requestText);
+        LogWriter.Write(requestText);
     });
 }
