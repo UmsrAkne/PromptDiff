@@ -14,10 +14,10 @@ namespace PromptDiff.Utils
 
             var logPath = Path.Combine(AppPaths.LocalDataDirectory, LogFileName);
 
-            using TextWriter tw = new StreamWriter(logPath);
+            using TextWriter tw = new StreamWriter(logPath, true);
             tw.WriteLine(string.Empty);
+            tw.WriteLine("----------");
             tw.WriteLine($"TimeStamp: {DateTime.Now}");
-            tw.WriteLine(string.Empty);
             tw.WriteLine(text);
         }
     }

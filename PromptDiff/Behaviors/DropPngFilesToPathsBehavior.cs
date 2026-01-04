@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Xaml.Behaviors;
+using PromptDiff.Utils;
 using PromptDiff.ViewModels;
 
 namespace PromptDiff.Behaviors
@@ -85,11 +86,14 @@ namespace PromptDiff.Behaviors
                     .Select(Path.GetFullPath)
                     .ToList();
 
+                var fileList = string.Empty;
                 foreach (var path in pngs)
                 {
+                    fileList += $"{path}{Environment.NewLine}";
                     viewModel.Paths.Add(path);
                 }
 
+                LogWriter.Write(fileList);
                 e.Handled = true;
             }
             catch
